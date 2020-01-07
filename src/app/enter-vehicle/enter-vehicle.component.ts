@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+
 import { VehicleService } from '../vehicle.service';
 import { Vehicle } from '../vehicle';
 
@@ -9,16 +11,24 @@ import { Vehicle } from '../vehicle';
 })
 export class EnterVehicleComponent implements OnInit {
 
-  constructor(private vehicleService: VehicleService) { }
+  vehicleForm: FormGroup;
+
+  constructor(private vehicleService: VehicleService, private formBuilder: FormBuilder) { 
+    this.vehicleForm = this.formBuilder.group({
+      placa: '',
+      cilindraje: ''
+    })
+  }
 
   ngOnInit() {
   }
 
-  enterVehicle() {
-    var vehicle: Vehicle = {placa: "ABC123", cilindraje: 2500};
+  enterVehicle(vehicle: Vehicle) {
+    console.log(vehicle);
     this.vehicleService.enterVehicle(vehicle).subscribe((response) => {
       console.log(response);      
     })
+    this.vehicleForm.reset();
   }
 
 }

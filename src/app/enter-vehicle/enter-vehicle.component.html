@@ -1,1 +1,16 @@
-<p>enter-vehicle works!</p>
+<form [formGroup]="vehicleForm" (ngSubmit)="enterVehicle(vehicleForm.value)">
+    <div>
+        <label for="placa">
+            Vehicle registation
+        </label>
+        <input id="placa" type="text" formControlName="placa">
+    </div>
+
+    <div>
+        <label for="cilindraje">
+            Vehicle cylinder
+        </label>
+        <input id="cilindraje" type="text" formControlName="cilindraje">
+    </div>
+    <button type="submit">Enter</button>
+</form>
