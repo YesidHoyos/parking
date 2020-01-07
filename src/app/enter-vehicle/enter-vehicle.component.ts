@@ -16,7 +16,8 @@ export class EnterVehicleComponent implements OnInit {
   constructor(private vehicleService: VehicleService, private formBuilder: FormBuilder) { 
     this.vehicleForm = this.formBuilder.group({
       placa: '',
-      cilindraje: ''
+      cilindraje: '',
+      tipo: ''
     })
   }
 

@@ -7,7 +7,7 @@ import { Vehicle } from './vehicle';
 })
 export class VehicleService {
 
-  API_URL: string = 'http://localhost:8000';
+  API_URL: string = 'http://localhost:8080/parqueadero';
 
   constructor(private http: HttpClient) { }
 
