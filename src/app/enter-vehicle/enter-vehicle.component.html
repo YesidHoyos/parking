@@ -1,9 +1,15 @@
 <form [formGroup]="vehicleForm" (ngSubmit)="enterVehicle(vehicleForm.value)">
     <div>
         <label for="placa">
-            Vehicle registation
+            Vehicle registration
         </label>
         <input id="placa" type="text" formControlName="placa">
+        <div *ngIf="vehicleFormControls.placa.invalid && (vehicleFormControls.placa.dirty 
+            || vehicleFormControls.placa.touched || controlFormError)">
+            <div *ngIf="vehicleFormControls.placa.errors.required">
+                Vehicle registration is required
+            </div>
+        </div>
     </div>
 
     <div>
@@ -11,6 +17,12 @@
             Vehicle cylinder
         </label>
         <input id="cilindraje" type="text" formControlName="cilindraje">
+        <div *ngIf="vehicleFormControls.cilindraje.invalid && (vehicleFormControls.cilindraje.dirty 
+            || vehicleFormControls.cilindraje.touched || controlFormError)">
+            <div *ngIf="vehicleFormControls.cilindraje.errors.required">
+                Vehicle cylinder is required
+            </div>
+        </div>
     </div>
 
     <div>
@@ -18,9 +30,18 @@
             Vehicle type
         </label>
         <select name="tipo" id="tipo" formControlName="tipo">
-            <option value="1" selected>Car</option> 
-            <option value="2">Bike</option>
+            <option *ngFor="let vehicleType of vehicleTypes" [value]="vehicleType.code">{{vehicleType.description}}
+            </option>
         </select>
+        <div *ngIf="vehicleFormControls.tipo.invalid && (vehicleFormControls.tipo.dirty 
+            || vehicleFormControls.tipo.touched || controlFormError)">
+            <div *ngIf="vehicleFormControls.tipo.errors.required">
+                Vehicle type is required
+            </div>
+            <div *ngIf="vehicleFormControls.tipo.errors.invalidType">
+                Invalid vehicle type
+            </div>
+        </div>
     </div>
     <button type="submit">Enter</button>
 </form>
