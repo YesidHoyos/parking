@@ -1,1 +1,15 @@
-<p>take-out-vehicle works!</p>
+<form [formGroup]="takeOutVehicleForm" (ngSubmit)="takeOutVehicle(takeOutVehicleForm.value)">
+    <div>
+        <label for="vehicleRegistration">
+            Vehicle registration
+        </label>
+        <input id="vehicleRegistration" type="text" formControlName="vehicleRegistration">
+        <div *ngIf="vehicleRegistration.invalid && (vehicleRegistration.dirty 
+            || vehicleRegistration.touched || controlFormError)">
+            <div *ngIf="vehicleRegistration.errors.required">
+                Vehicle registration is required
+            </div>
+        </div>
+    </div>
+    <button type="submit">Take Out</button>
+</form>
