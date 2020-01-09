@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { VehicleService } from '../vehicle.service';
+import { Ticket } from '../ticket';
 
 @Component({
   selector: 'app-take-out-vehicle',
@@ -10,8 +12,12 @@ export class TakeOutVehicleComponent implements OnInit {
 
   takeOutVehicleForm: FormGroup;
   controlFormError: boolean;
+  ticket: Ticket;
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(
+    private vehicleService: VehicleService,
+    private formBuilder: FormBuilder
+  ) { }
 
   ngOnInit() {
     this.takeOutVehicleForm = this.formBuilder.group({
@@ -23,14 +29,16 @@ export class TakeOutVehicleComponent implements OnInit {
     return this.takeOutVehicleForm.controls.vehicleRegistration; 
   }
 
-  takeOutVehicle(vehicleRegistration: string) {
+  takeOutVehicle(data) {
     this.controlFormError = false;
 
     if (this.takeOutVehicleForm.invalid) {
       this.controlFormError = true;
       return;
     }
-
+    this.vehicleService.takeOutVehicle(data.vehicleRegistration).subscribe((response) => {
+      this.ticket = response.body;
+    })
 
     this.takeOutVehicleForm.reset();
   }
