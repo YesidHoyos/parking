@@ -7,12 +7,14 @@ import { AppComponent } from './app.component';
 import { EnterVehicleComponent } from './enter-vehicle/enter-vehicle.component';
 import { AppRoutingModule } from './app-routing.module';
 import { VehiclesComponent } from './vehicles/vehicles.component';
+import { TakeOutVehicleComponent } from './take-out-vehicle/take-out-vehicle.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     EnterVehicleComponent,
-    VehiclesComponent
+    VehiclesComponent,
+    TakeOutVehicleComponent
   ],
   imports: [
     BrowserModule,
