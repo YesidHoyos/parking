@@ -5,6 +5,9 @@ import { VehicleService } from '../vehicle.service';
 import { Vehicle } from '../vehicle';
 import { VehicleType } from '../vehicle-type';
 import { VehiculeTypeValidator } from '../vehicle-type-validator';
+import { VehicleEntered } from '../vehicle-entered';
+import { Observable } from 'rxjs';
+import { HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-enter-vehicle',
@@ -45,7 +48,7 @@ export class EnterVehicleComponent implements OnInit {
       return;
     }
     this.vehicleService.enterVehicle(vehicle).subscribe((response) => {
-      console.log(response);      
+      console.log(response.body);      
     })
     this.vehicleForm.reset();
   }
