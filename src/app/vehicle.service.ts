@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Vehicle } from './vehicle';
+import { VehicleEntered } from './vehicle-entered';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +13,11 @@ export class VehicleService {
 
   constructor(private http: HttpClient) { }
 
-  enterVehicle(vehicle: Vehicle){
-    return this.http.post(`${this.API_URL}/vehiculos`, vehicle);
+  enterVehicle(vehicle: Vehicle): Observable<HttpResponse<VehicleEntered>>{
+    return this.http.post<VehicleEntered>(`${this.API_URL}/vehiculos`, vehicle, { observe: 'response' });
+  }
+
+  getVehicles(): Observable<HttpResponse<VehicleEntered[]>> {
+    return this.http.get<VehicleEntered[]>(`${this.API_URL}/vehiculos`, { observe: 'response' });
   }
 }

@@ -6,11 +6,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { EnterVehicleComponent } from './enter-vehicle/enter-vehicle.component';
 import { AppRoutingModule } from './app-routing.module';
+import { VehiclesComponent } from './vehicles/vehicles.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    EnterVehicleComponent
+    EnterVehicleComponent,
+    VehiclesComponent
   ],
   imports: [
     BrowserModule,
