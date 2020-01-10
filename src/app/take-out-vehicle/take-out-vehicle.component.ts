@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { VehicleService } from '../vehicle.service';
 import { Ticket } from '../ticket';
 import { Router } from '@angular/router';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-take-out-vehicle',
@@ -12,8 +13,9 @@ import { Router } from '@angular/router';
 export class TakeOutVehicleComponent implements OnInit {
 
   takeOutVehicleForm: FormGroup;
-  controlFormError: boolean;
-  ticket: Ticket;
+  private controlFormError: boolean;
+  private ticket: Ticket;
+  private errorMessage: string;
 
   constructor(
     private vehicleService: VehicleService,
@@ -33,16 +35,22 @@ export class TakeOutVehicleComponent implements OnInit {
 
   takeOutVehicle(data) {
     this.controlFormError = false;
+    this.errorMessage = undefined;
 
     if (this.takeOutVehicleForm.invalid) {
       this.controlFormError = true;
       return;
     }
-    this.vehicleService.takeOutVehicle(data.vehicleRegistration).subscribe((response) => {
+    this.vehicleService.takeOutVehicle(data.vehicleRegistration)
+    .pipe(
+      finalize(() => {
+        this.takeOutVehicleForm.reset();
+      })
+    ).subscribe((response) => {
       this.ticket = response.body;
+    }, (error) => {
+      this.errorMessage = error.status === 0 ? 'Service Unavailable' : error.error;
     })
-
-    this.takeOutVehicleForm.reset();
   }
 
   goToVehicles() {

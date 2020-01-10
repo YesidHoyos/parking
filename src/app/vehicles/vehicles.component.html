@@ -10,3 +10,7 @@
         <td>{{vehicle.fechaIngreso | date:'medium'}}</td>
     </tr>
 </table>
+
+<div *ngIf="errorMessage !== undefined">
+    <strong>Warning!</strong> {{errorMessage}}
+</div>

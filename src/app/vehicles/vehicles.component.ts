@@ -9,6 +9,7 @@ import { VehicleEntered } from '../vehicle-entered';
 })
 export class VehiclesComponent implements OnInit {
 
+  private errorMessage: string;  
   private vehicles: Array<VehicleEntered> = [];
 
   constructor(private vehicleService: VehicleService) { }
@@ -18,8 +19,11 @@ export class VehiclesComponent implements OnInit {
   }
 
   getVehicles() {
+    this.errorMessage = undefined;
     this.vehicleService.getVehicles().subscribe((response) => {
        this.vehicles = [...response.body];
+    }, (error) => {
+      this.errorMessage = error.status === 0 ? 'Service Unavailable' : error.error;;
     });
   }
 }
