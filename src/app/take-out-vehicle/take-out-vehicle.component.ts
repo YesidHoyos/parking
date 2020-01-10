@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { VehicleService } from '../vehicle.service';
 import { Ticket } from '../ticket';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-take-out-vehicle',
@@ -16,7 +17,8 @@ export class TakeOutVehicleComponent implements OnInit {
 
   constructor(
     private vehicleService: VehicleService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -41,6 +43,10 @@ export class TakeOutVehicleComponent implements OnInit {
     })
 
     this.takeOutVehicleForm.reset();
+  }
+
+  goToVehicles() {
+    this.router.navigate(['vehicles'])
   }
 
 }

@@ -13,3 +13,13 @@
     </div>
     <button type="submit">Take Out</button>
 </form>
+<div *ngIf="ticket !== undefined">
+    <p>
+        Vehicle Registration: {{ticket.placa}} <br>
+        Vehicle Cylinder: {{ticket.cilindraje}} <br>
+        Registration Date: {{ticket.fechaIngreso | date:'medium'}} <br>
+        Departure Date: {{ticket.fechaSalida | date:'medium'}} <br>
+        Total: {{ticket.totalAPagar | currency:'COP':'symbol-narrow'}}
+    </p>
+    <button (click)="goToVehicles()">Ok</button>
+</div> 
