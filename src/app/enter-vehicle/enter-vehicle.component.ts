@@ -6,8 +6,7 @@ import { Vehicle } from '../vehicle';
 import { VehicleType } from '../vehicle-type';
 import { VehiculeTypeValidator } from '../vehicle-type-validator';
 import { VehicleEntered } from '../vehicle-entered';
-import { Observable } from 'rxjs';
-import { HttpResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-enter-vehicle',
@@ -18,6 +17,7 @@ export class EnterVehicleComponent implements OnInit {
 
   vehicleForm: FormGroup;
   controlFormError: boolean;
+  vehicleEntered: VehicleEntered;
 
   car: VehicleType = new VehicleType(1,'Car');
   bike: VehicleType = new VehicleType(2, 'Bike');
@@ -25,8 +25,11 @@ export class EnterVehicleComponent implements OnInit {
 
   private commonValidators: Validators = [Validators.required];
 
-  constructor(private vehicleService: VehicleService, private formBuilder: FormBuilder) { 
-  }
+  constructor(
+    private vehicleService: VehicleService, 
+    private formBuilder: FormBuilder,
+    private router: Router
+    ) { }
 
   ngOnInit() {
     this.vehicleForm = this.formBuilder.group({
@@ -48,9 +51,13 @@ export class EnterVehicleComponent implements OnInit {
       return;
     }
     this.vehicleService.enterVehicle(vehicle).subscribe((response) => {
-      console.log(response.body);      
+      this.vehicleEntered = response.body;      
     })
     this.vehicleForm.reset();
+  }
+
+  goToVehicles() {
+    this.router.navigate(['vehicles'])
   }
 
 }
