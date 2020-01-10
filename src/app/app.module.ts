@@ -10,6 +10,7 @@ import { VehiclesComponent } from './vehicles/vehicles.component';
 import { TakeOutVehicleComponent } from './take-out-vehicle/take-out-vehicle.component';
 import { VehicleTypePipe } from './vehicle-type.pipe';
 import { HttpErrorInterceptorService } from './http-error-interceptor.service';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { HttpErrorInterceptorService } from './http-error-interceptor.service';
     EnterVehicleComponent,
     VehiclesComponent,
     TakeOutVehicleComponent,
-    VehicleTypePipe
+    VehicleTypePipe,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
