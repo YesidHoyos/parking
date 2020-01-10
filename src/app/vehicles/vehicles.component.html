@@ -6,7 +6,7 @@
     </tr>
     <tr *ngFor="let vehicle of vehicles">
         <td>{{vehicle.placa}}</td>
-        <td>{{vehicle.tipo}}</td>
+        <td>{{vehicle.tipo | vehicleType}}</td>
         <td>{{vehicle.fechaIngreso | date:'medium'}}</td>
     </tr>
 </table>

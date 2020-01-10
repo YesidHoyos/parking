@@ -8,13 +8,15 @@ import { EnterVehicleComponent } from './enter-vehicle/enter-vehicle.component';
 import { AppRoutingModule } from './app-routing.module';
 import { VehiclesComponent } from './vehicles/vehicles.component';
 import { TakeOutVehicleComponent } from './take-out-vehicle/take-out-vehicle.component';
+import { VehicleTypePipe } from './vehicle-type.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     EnterVehicleComponent,
     VehiclesComponent,
-    TakeOutVehicleComponent
+    TakeOutVehicleComponent,
+    VehicleTypePipe
   ],
   imports: [
     BrowserModule,
