@@ -7,6 +7,7 @@ import { VehicleType } from '../vehicle-type';
 import { VehiculeTypeValidator } from '../vehicle-type-validator';
 import { VehicleEntered } from '../vehicle-entered';
 import { Router } from '@angular/router';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-enter-vehicle',
@@ -16,12 +17,13 @@ import { Router } from '@angular/router';
 export class EnterVehicleComponent implements OnInit {
 
   vehicleForm: FormGroup;
-  controlFormError: boolean;
-  vehicleEntered: VehicleEntered;
+  private controlFormError: boolean;
+  private vehicleEntered: VehicleEntered;
+  private errorMessage: string;
 
-  car: VehicleType = new VehicleType(1,'Car');
-  bike: VehicleType = new VehicleType(2, 'Bike');
-  vehicleTypes: VehicleType[] = [this.car, this.bike]
+  private car: VehicleType = new VehicleType(1,'Car');
+  private bike: VehicleType = new VehicleType(2, 'Bike');
+  private vehicleTypes: VehicleType[] = [this.car, this.bike]
 
   private commonValidators: Validators = [Validators.required];
 
@@ -45,15 +47,22 @@ export class EnterVehicleComponent implements OnInit {
 
   enterVehicle(vehicle: Vehicle) {
     this.controlFormError = false;
+    this.errorMessage = undefined;
 
     if (this.vehicleForm.invalid) {
       this.controlFormError = true;
       return;
     }
-    this.vehicleService.enterVehicle(vehicle).subscribe((response) => {
+    this.vehicleService.enterVehicle(vehicle)
+    .pipe(
+      finalize(() => {
+        this.vehicleForm.reset();
+      })
+    ).subscribe((response) => {
       this.vehicleEntered = response.body;      
+    }, (error) => {
+      this.errorMessage = error.status === 0 ? 'Service Unavailable' : error.error;
     })
-    this.vehicleForm.reset();
   }
 
   goToVehicles() {

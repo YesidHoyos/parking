@@ -23,3 +23,7 @@
     </p>
     <button (click)="goToVehicles()">Ok</button>
 </div> 
+
+<div *ngIf="errorMessage !== undefined">
+    <strong>Warning!</strong> {{errorMessage}}
+</div>
