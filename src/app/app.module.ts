@@ -11,6 +11,8 @@ import { TakeOutVehicleComponent } from './take-out-vehicle/take-out-vehicle.com
 import { VehicleTypePipe } from './vehicle-type.pipe';
 import { HttpErrorInterceptorService } from './http-error-interceptor.service';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from './material/material.module';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { NotFoundComponent } from './not-found/not-found.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MaterialModule
   ],
   providers: [
     {
