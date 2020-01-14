@@ -7,9 +7,9 @@ import { NotFoundComponent } from './not-found/not-found.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'vehicles', pathMatch: 'full' },
-  { path: 'enter-vehicle', component: EnterVehicleComponent },
-  { path: 'vehicles', component: VehiclesComponent },
-  { path: 'take-out-vehicle', component: TakeOutVehicleComponent},
+  { path: 'enter-vehicle', component: EnterVehicleComponent, data: {animation: 'enterVehicle'} },
+  { path: 'vehicles', component: VehiclesComponent, data: {animation: 'vehicles'} },
+  { path: 'take-out-vehicle', component: TakeOutVehicleComponent, data: {animation: 'takeOutVehicle'} },
   { path: 'page-not-found', component: NotFoundComponent},
   { path: '**', redirectTo: '/page-not-found'}
 ];
