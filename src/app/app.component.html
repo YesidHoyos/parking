@@ -1,6 +1,6 @@
 <nav mat-tab-nav-bar mat-align-tabs="center">
-    <a mat-tab-link *ngFor="let link of links" (click)="activeLink = link[0]" [active]="activeLink == link[0]"
-        [routerLink]="link[1]">{{link[0]}}
+    <a mat-tab-link *ngFor="let link of links" [routerLink]="link[1]" routerLinkActive="active-link">
+        {{link[0]}}
     </a>
 </nav>
 <div [@routeAnimations]="prepareRoute(outlet)">

@@ -2,7 +2,7 @@ import { trigger, transition, style, query, animateChild, group, animate } from 
 
 export const slideInAnimation =
   trigger('routeAnimations', [
-    transition('vehicles => enterVehicle, vehicles => takeOutVehicle, enterVehicle => takeOutVehicle', [
+    transition('vehicles => enter-vehicle, vehicles => take-out-vehicle, enter-vehicle => take-out-vehicle', [
       style({ position: 'relative' }),
       query(':enter, :leave', [
         style({
@@ -26,7 +26,7 @@ export const slideInAnimation =
       ]),
       query(':enter', animateChild()),
     ]),
-    transition('takeOutVehicle => enterVehicle, takeOutVehicle => vehicles, enterVehicle => vehicles', [
+    transition('take-out-vehicle => enter-vehicle, take-out-vehicle => vehicles, enter-vehicle => vehicles', [
       style({ position: 'relative' }),
       query(':enter, :leave', [
         style({
