@@ -15,7 +15,6 @@ export const slideInAnimation =
       query(':enter', [
         style({ right: '-100%'})
       ]),
-      query(':leave', animateChild()),
       group([
         query(':leave', [
           animate('300ms ease-out', style({ right: '100%'}))
@@ -24,7 +23,6 @@ export const slideInAnimation =
           animate('300ms ease-out', style({ right: '0%'}))
         ])
       ]),
-      query(':enter', animateChild()),
     ]),
     transition('take-out-vehicle => enter-vehicle, take-out-vehicle => vehicles, enter-vehicle => vehicles', [
       style({ position: 'relative' }),
@@ -39,7 +37,6 @@ export const slideInAnimation =
       query(':enter', [
         style({ left: '-100%'})
       ]),
-      query(':leave', animateChild()),
       group([
         query(':leave', [
           animate('200ms ease-out', style({ left: '100%'}))
@@ -48,6 +45,5 @@ export const slideInAnimation =
           animate('300ms ease-out', style({ left: '0%'}))
         ])
       ]),
-      query(':enter', animateChild()),
     ])
   ]);

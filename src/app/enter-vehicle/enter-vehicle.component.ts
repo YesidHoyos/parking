@@ -50,6 +50,9 @@ export class EnterVehicleComponent implements OnInit {
     this.errorMessage = undefined;
 
     if (this.vehicleForm.invalid) {
+      console.log('invalid');
+      console.log(vehicle);
+      
       this.controlFormError = true;
       return;
     }
