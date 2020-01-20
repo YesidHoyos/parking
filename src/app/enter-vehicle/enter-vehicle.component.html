@@ -1,4 +1,5 @@
 <div class="container">
+    <form [formGroup]="vehicleForm" (ngSubmit)="enterVehicle(vehicleForm.value)">
         <div>
             <mat-form-field [color]="primary">
                 <input matInput placeholder="Vehicle Registration" type="text" formControlName="placa">
