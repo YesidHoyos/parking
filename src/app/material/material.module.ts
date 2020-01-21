@@ -8,6 +8,8 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 const MaterialComponents = [
   MatTabsModule, 
@@ -18,7 +20,9 @@ const MaterialComponents = [
   MatSortModule,
   MatSelectModule,
   MatButtonModule,
-  MatDialogModule
+  MatDialogModule,
+  MatIconModule,
+  MatGridListModule
 ];
 
 @NgModule({

@@ -6,8 +6,9 @@ import { Vehicle } from '../vehicle';
 import { VehicleType } from '../vehicle-type';
 import { VehiculeTypeValidator } from '../vehicle-type-validator';
 import { VehicleEntered } from '../vehicle-entered';
-import { Router } from '@angular/router';
 import { finalize } from 'rxjs/operators';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogComponent } from '../dialog/dialog.component';
 
 @Component({
   selector: 'app-enter-vehicle',
@@ -29,8 +30,8 @@ export class EnterVehicleComponent implements OnInit {
 
   constructor(
     private vehicleService: VehicleService, 
-    private formBuilder: FormBuilder,
-    private router: Router
+    private formBuilder: FormBuilder,    
+    public dialog: MatDialog
     ) { }
 
   ngOnInit() {
@@ -49,17 +50,18 @@ export class EnterVehicleComponent implements OnInit {
     this.controlFormError = false;
     this.errorMessage = undefined;
 
-    if (this.vehicleForm.invalid) {
-      console.log('invalid');
-      console.log(vehicle);
-      
+    if (this.vehicleForm.invalid) {      
       this.controlFormError = true;
       return;
     }
     this.vehicleService.enterVehicle(vehicle)
     .pipe(
       finalize(() => {
-        this.vehicleForm.reset();
+        if(this.errorMessage) {
+          this.openDialog(true, this.errorMessage, null);                   
+        } else {
+          this.openDialog(false, null, this.vehicleEntered);
+        }
       })
     ).subscribe((response) => {
       this.vehicleEntered = response.body;      
@@ -68,8 +70,11 @@ export class EnterVehicleComponent implements OnInit {
     })
   }
 
-  goToVehicles() {
-    this.router.navigate(['vehicles'])
+  openDialog(error: boolean, message: string, vehicleEntered: VehicleEntered) {
+    this.dialog.open(DialogComponent, {
+      width: '300px',
+      data: {component: 'EnterVehicleComponent', error, message, object: vehicleEntered}
+    });
   }
 
 }

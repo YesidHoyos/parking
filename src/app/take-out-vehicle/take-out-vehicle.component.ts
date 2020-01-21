@@ -4,6 +4,8 @@ import { VehicleService } from '../vehicle.service';
 import { Ticket } from '../ticket';
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs/operators';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogComponent } from '../dialog/dialog.component';
 
 @Component({
   selector: 'app-take-out-vehicle',
@@ -20,7 +22,8 @@ export class TakeOutVehicleComponent implements OnInit {
   constructor(
     private vehicleService: VehicleService,
     private formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,    
+    public dialog: MatDialog
   ) { }
 
   ngOnInit() {
@@ -44,7 +47,11 @@ export class TakeOutVehicleComponent implements OnInit {
     this.vehicleService.takeOutVehicle(data.vehicleRegistration)
     .pipe(
       finalize(() => {
-        this.takeOutVehicleForm.reset();
+        if(this.errorMessage) {
+          this.openDialog(true, this.errorMessage, null);                   
+        } else {
+          this.openDialog(false, null, this.ticket);
+        }
       })
     ).subscribe((response) => {
       this.ticket = response.body;
@@ -53,8 +60,11 @@ export class TakeOutVehicleComponent implements OnInit {
     })
   }
 
-  goToVehicles() {
-    this.router.navigate(['vehicles'])
+  openDialog(error: boolean, message: string, ticket: Ticket) {
+    this.dialog.open(DialogComponent, {
+      width: '450px',
+      data: {component: 'TakeOutVehicleComponent', error, message, object: ticket}
+    });
   }
 
 }

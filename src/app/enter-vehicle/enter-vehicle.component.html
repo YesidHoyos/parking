@@ -42,16 +42,6 @@
                 </mat-error>
             </mat-form-field>
         </div>
-        <button mat-flat-button color="primary" type="submit">Enter</button>
+        <button  mat-flat-button color="primary" type="submit">Enter</button >
     </form>
-    
-    <div *ngIf="vehicleEntered !== undefined">
-        <p>The vehicle with {{vehicleEntered.placa}} registration has been entered correctly at
-            {{vehicleEntered.fechaIngreso | date:'medium'}}</p>
-        <button (click)="goToVehicles()">Ok</button>
-    </div>
-    
-    <div *ngIf="errorMessage !== undefined">
-        <strong>Warning!</strong> {{errorMessage}}
-    </div>
 </div>
