@@ -1,29 +1,16 @@
-<form [formGroup]="takeOutVehicleForm" (ngSubmit)="takeOutVehicle(takeOutVehicleForm.value)">
-    <div>
-        <label for="vehicleRegistration">
-            Vehicle registration
-        </label>
-        <input id="vehicleRegistration" type="text" formControlName="vehicleRegistration">
-        <div *ngIf="vehicleRegistration.invalid && (vehicleRegistration.dirty 
-            || vehicleRegistration.touched || controlFormError)">
-            <div *ngIf="vehicleRegistration.errors.required">
-                Vehicle registration is required
-            </div>
+<div class="container">
+    <form [formGroup]="takeOutVehicleForm" (ngSubmit)="takeOutVehicle(takeOutVehicleForm.value)">
+        <div>
+            <mat-form-field [color]="primary">
+                <input matInput placeholder="Vehicle Registration" type="text" formControlName="vehicleRegistration">
+                <mat-error *ngIf="vehicleRegistration.invalid && (vehicleRegistration.dirty 
+                || vehicleRegistration.touched || controlFormError)">
+                    <div *ngIf="vehicleRegistration.errors.required">
+                        Vehicle registration is required
+                    </div>
+                </mat-error>
+            </mat-form-field>
         </div>
-    </div>
-    <button type="submit">Take Out</button>
-</form>
-<div *ngIf="ticket !== undefined">
-    <p>
-        Vehicle Registration: {{ticket.placa}} <br>
-        Vehicle Cylinder: {{ticket.cilindraje}} <br>
-        Registration Date: {{ticket.fechaIngreso | date:'medium'}} <br>
-        Departure Date: {{ticket.fechaSalida | date:'medium'}} <br>
-        Total: {{ticket.totalAPagar | currency:'COP':'symbol-narrow'}}
-    </p>
-    <button (click)="goToVehicles()">Ok</button>
-</div> 
-
-<div *ngIf="errorMessage !== undefined">
-    <strong>Warning!</strong> {{errorMessage}}
+        <button mat-flat-button color="primary" type="submit">Take Out</button>
+    </form>
 </div>

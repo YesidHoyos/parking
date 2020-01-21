@@ -1,56 +1,47 @@
-<form [formGroup]="vehicleForm" (ngSubmit)="enterVehicle(vehicleForm.value)">
-    <div>
-        <label for="placa">
-            Vehicle registration
-        </label>
-        <input id="placa" type="text" formControlName="placa">
-        <div *ngIf="vehicleFormControls.placa.invalid && (vehicleFormControls.placa.dirty 
-            || vehicleFormControls.placa.touched || controlFormError)">
-            <div *ngIf="vehicleFormControls.placa.errors.required">
-                Vehicle registration is required
-            </div>
+<div class="container">
+    <form [formGroup]="vehicleForm" (ngSubmit)="enterVehicle(vehicleForm.value)">
+        <div>
+            <mat-form-field [color]="primary">
+                <input matInput placeholder="Vehicle Registration" type="text" formControlName="placa">
+                <mat-error *ngIf="vehicleFormControls.placa.invalid && (vehicleFormControls.placa.dirty 
+                    || vehicleFormControls.placa.touched || controlFormError)">
+                    <div *ngIf="vehicleFormControls.placa.errors.required">
+                        Vehicle registration is required
+                    </div>
+                </mat-error>
+            </mat-form-field>
         </div>
-    </div>
-
-    <div>
-        <label for="cilindraje">
-            Vehicle cylinder
-        </label>
-        <input id="cilindraje" type="text" formControlName="cilindraje">
-        <div *ngIf="vehicleFormControls.cilindraje.invalid && (vehicleFormControls.cilindraje.dirty 
-            || vehicleFormControls.cilindraje.touched || controlFormError)">
-            <div *ngIf="vehicleFormControls.cilindraje.errors.required">
-                Vehicle cylinder is required
-            </div>
+    
+        <div>
+            <mat-form-field [color]="primary">
+                <input matInput placeholder="Vehicle Cylinder" type="number" formControlName="cilindraje">
+                <mat-error *ngIf="vehicleFormControls.cilindraje.invalid && (vehicleFormControls.cilindraje.dirty 
+                    || vehicleFormControls.cilindraje.touched || controlFormError)">
+                    <div *ngIf="vehicleFormControls.cilindraje.errors.required">
+                        Vehicle cylinder is required
+                    </div>
+                </mat-error>
+            </mat-form-field>
         </div>
-    </div>
-
-    <div>
-        <label for="tipo">
-            Vehicle type
-        </label>
-        <select name="tipo" id="tipo" formControlName="tipo">
-            <option *ngFor="let vehicleType of vehicleTypes" [value]="vehicleType.code">{{vehicleType.description}}
-            </option>
-        </select>
-        <div *ngIf="vehicleFormControls.tipo.invalid && (vehicleFormControls.tipo.dirty 
-            || vehicleFormControls.tipo.touched || controlFormError)">
-            <div *ngIf="vehicleFormControls.tipo.errors.required">
-                Vehicle type is required
-            </div>
-            <div *ngIf="vehicleFormControls.tipo.errors.invalidType">
-                Invalid vehicle type
-            </div>
+        <div>
+            <mat-form-field>
+                <mat-label>Vehicle type</mat-label>
+                <mat-select formControlName="tipo">
+                    <mat-option *ngFor="let vehicleType of vehicleTypes" [value]="vehicleType.code">
+                        {{vehicleType.description}}
+                    </mat-option>
+                </mat-select>
+                <mat-error *ngIf="vehicleFormControls.tipo.invalid && (vehicleFormControls.tipo.dirty 
+                                || vehicleFormControls.tipo.touched || controlFormError)">
+                    <div *ngIf="vehicleFormControls.tipo.errors.required">
+                        Vehicle type is required
+                    </div>
+                    <div *ngIf="vehicleFormControls.tipo.errors.invalidType">
+                        Invalid vehicle type
+                    </div>
+                </mat-error>
+            </mat-form-field>
         </div>
-    </div>
-    <button type="submit">Enter</button>
-</form>
-
-<div *ngIf="vehicleEntered !== undefined">
-    <p>The vehicle with {{vehicleEntered.placa}} registration has been entered correctly at {{vehicleEntered.fechaIngreso | date:'medium'}}</p>
-    <button (click)="goToVehicles()">Ok</button>
-</div>
-
-<div *ngIf="errorMessage !== undefined">
-    <strong>Warning!</strong> {{errorMessage}}
+        <button  mat-flat-button color="primary" type="submit">Enter</button >
+    </form>
 </div>
