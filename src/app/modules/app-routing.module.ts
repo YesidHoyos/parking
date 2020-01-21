@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { EnterVehicleComponent } from './enter-vehicle/enter-vehicle.component';
-import { VehiclesComponent } from './vehicles/vehicles.component';
-import { TakeOutVehicleComponent } from './take-out-vehicle/take-out-vehicle.component';
-import { NotFoundComponent } from './not-found/not-found.component';
+import { EnterVehicleComponent } from '../core/enter-vehicle/enter-vehicle.component';
+import { VehiclesComponent } from '../core/vehicles/vehicles.component';
+import { TakeOutVehicleComponent } from '../core/take-out-vehicle/take-out-vehicle.component';
+import { NotFoundComponent } from '../core/not-found/not-found.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'vehicles', pathMatch: 'full' },

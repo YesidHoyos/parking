@@ -1,4 +1,4 @@
-import { FormGroup, AbstractControl } from '@angular/forms';
+import { AbstractControl } from '@angular/forms';
 
 export function VehiculeTypeValidator(control: AbstractControl): { [key: string]: any } | null {
     // set error on control if validation fails
