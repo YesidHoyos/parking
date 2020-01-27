@@ -1,0 +1,46 @@
+<div *ngIf="data.error === true">
+    <div mat-dialog-title align="center">
+        <mat-icon color="warn">error</mat-icon>
+    </div>
+    <div mat-dialog-content align="center">
+        <p>{{data.message}}</p>
+    </div>
+    <div mat-dialog-actions align="center">
+        <button color="primary" mat-button cdkFocusInitial [mat-dialog-close]="true">Ok</button>
+    </div>
+</div>
+
+<div *ngIf="data.error === false">
+    <div mat-dialog-title align="center">
+        <mat-icon [ngStyle]="{'color':'green'}">check_circle</mat-icon>
+    </div>
+    <div mat-dialog-content>
+        <div *ngIf="data.component === 'EnterVehicleComponent'" align="center">
+            <p>The vehicle with registration {{data.object.placa}} has been entered correctly at
+                {{data.object.fechaIngreso | date:'medium'}}
+            </p>
+        </div>
+        <div *ngIf="data.component === 'TakeOutVehicleComponent'">
+            <mat-grid-list cols="2" rowHeight="100px">
+                <mat-grid-tile>
+                    Vehicle Registration:<br>
+                    Vehicle Cylinder:<br>
+                    Registration Date:<br>
+                    Departure Date:
+                </mat-grid-tile>
+                <mat-grid-tile>
+                    {{data.object.placa}} <br>
+                    {{data.object.cilindraje}} <br>
+                    {{data.object.fechaIngreso | date:'medium'}} <br>
+                    {{data.object.fechaSalida | date:'medium'}}
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="2" [rowspan]="1">
+                    <div class="mat-h1">Total: {{data.object.totalAPagar | currency:'COP':'symbol-narrow'}}</div>
+                </mat-grid-tile>
+            </mat-grid-list>
+        </div>
+    </div>
+    <mat-dialog-actions align="center">
+        <button color="primary" mat-button cdkFocusInitial (click)="goToVehicles()">Ok</button>
+    </mat-dialog-actions>
+</div>
